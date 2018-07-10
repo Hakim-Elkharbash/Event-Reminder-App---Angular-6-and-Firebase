@@ -13,7 +13,6 @@ export class ViewtodolistComponent implements OnInit {
 
   constructor(private todoAction: FiredbService) {
     this.todosItems = this.todoAction.viewtodolist()
-   console.log(this.todosItems)
   }
 
   ngOnInit() {
