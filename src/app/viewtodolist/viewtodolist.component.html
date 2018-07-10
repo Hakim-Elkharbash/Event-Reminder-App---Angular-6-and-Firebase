@@ -1,3 +1,5 @@
-<p>
-  viewtodolist works!
-</p>
+<ul>
+    <li *ngFor="let item of todosItems | async">
+       {{ item | json }}
+    </li>
+  </ul>
