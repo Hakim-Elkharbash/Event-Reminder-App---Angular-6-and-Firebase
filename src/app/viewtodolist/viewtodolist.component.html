@@ -1,6 +1,16 @@
-<ul>
-    <li *ngFor="let item of todosItems | async">
-       {{ item }}
-       <!-- {{ item | json }} -->
-    </li>
-  </ul>
+<div class="container">
+  <br>
+          <div class="card text-white bg-dark mb-3" *ngFor="let item of todosItems | async">
+            <div class="card-header">{{ item.flag }}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ item.data }}</h5>
+              <p class="card-text">{{ item.item }}</p>
+            </div>
+          </div>
+       <!-- {{ item.data | json }} -->
+</div>
+ 
+       
+
+
+
