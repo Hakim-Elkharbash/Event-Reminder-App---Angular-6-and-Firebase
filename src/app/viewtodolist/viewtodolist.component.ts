@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FiredbService } from '../firedb.service';
+//import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-viewtodolist',
@@ -13,10 +14,20 @@ export class ViewtodolistComponent implements OnInit {
 
   constructor(private todoAction: FiredbService) {
     this.todosItems = this.todoAction.viewtodolist()
+  //this.modalService.open("#DelModal")
   }
 
   ngOnInit() {
    
   }
+ 
+  deltodoitem(itemid: any){
+    this.todoAction.deltodoitem(itemid)
+  }
 
+
+
+
+
+  
 }

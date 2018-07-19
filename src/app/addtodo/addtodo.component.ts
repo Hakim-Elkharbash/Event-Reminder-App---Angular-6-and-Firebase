@@ -9,7 +9,7 @@ import { FiredbService } from '../firedb.service';
 export class AddtodoComponent implements OnInit {
 
   constructor(private todoAction: FiredbService) {
-     this.todoAction.addtodolist()
+     this.todoAction.addtodoitem()
   }
 
   ngOnInit() {

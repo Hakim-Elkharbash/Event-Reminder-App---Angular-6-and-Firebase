@@ -20,17 +20,27 @@ export class FiredbService {
         )
       );
     
-   
+   console.log(this.todosItems)
   }
 
   viewtodolist(){
-
     return this.todosItems;
   }
 
-  addtodolist(){
+  addtodoitem(){
     //this.todosItemsRef = this.todoDB.list('todos');
-    this.todosItemsRef.push({"flag":"pandding","data":"7/7/2018","item":"Check my email"});
+    this.todosItemsRef.push({"flag":"pandding","date":"7/7/2018","item":"Check my email"});
+  }
+
+  deltodoitem(itemid: any){
+    this.todosItemsRef.remove(itemid)
+      .catch(error => this.handleError(error));
+  }
+
+
+  //----- to handle errors
+  private handleError(error) {
+    console.log(error);
   }
 
 }
