@@ -62,7 +62,33 @@
           </li> 
         </ul>
     
-        <button class="btn btn-outline-danger my-2 my-sm-0" >Delete All</button>
+        <button class="btn btn-outline-danger my-2 my-sm-0" (click)="delalltodoitemsConfirmed(content)" placement="left" ngbTooltip="Delete all item">Delete All</button>
 
       </div>
   </nav>
+
+
+
+
+
+
+
+
+
+  <!-- Modal to confirm deletion-->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">To-Do List</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        Do you want to delete ALL item(s).
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('confirmed')">YES, Delete All</button>
+        <button type="button" class="btn btn-success" (click)="c('cancel')">Cancel</button>
+      </div>
+  </ng-template>
+  

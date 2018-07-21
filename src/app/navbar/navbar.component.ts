@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FiredbService } from '../firedb.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private todoAction: FiredbService, private modalService: NgbModal) { }
 
   ngOnInit() {
   }
+
+
+
+  delalltodoitemsConfirmed(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      if (result === "confirmed") 
+        this.todoAction.delalltodoitems()   
+    }, (error) => {
+      //alert("cross click")
+    });
+  }
+
 
 }

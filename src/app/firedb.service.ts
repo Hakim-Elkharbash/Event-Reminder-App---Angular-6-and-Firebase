@@ -37,6 +37,11 @@ export class FiredbService {
   }
 
 
+  delalltodoitems(){
+    this.todosItemsRef.remove()
+    .catch(error => this.handleError(error));
+  }
+
   //----- to handle errors
   private handleError(error) {
     console.log(error);

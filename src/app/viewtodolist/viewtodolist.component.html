@@ -4,7 +4,7 @@
                 <div class="btn-group pull-right" role="group" aria-label="Basic example">   
                     {{ item.date }}
                 </div>
-                <div class=" float-right"><span (click)="deltodoitemConfirmed(content,item.key)"><span class="text-muted">Delete </span> <i class="fas fa-trash-alt"></i></span></div>
+                <div class=" float-right"><span (click)="deltodoitemConfirmed(content,item.key)" placement="left" ngbTooltip="Delete item"> <i class="fas fa-trash-alt"></i></span></div>
             </div>
 
             <div class="card-body">
@@ -14,12 +14,15 @@
 
             <div class="card-footer">
                 <div class="btn-group pull-right" role="group" aria-label="Basic example"> 
-                   <h4> <span class="badge badge-success"><i class="fas fa-clock"></i> {{ item.flag }}</span> </h4>
+                    <button type="button" class="btn btn-success disabled"><i class="fas fa-clock"></i> {{ item.flag }}</button>
+                    <button type="button" class="btn btn-outline-info"><i class="fas fa-check"></i> Done</button>
+
                 </div>
+
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary" title="Add to calender"><i class="fas fa-calendar-alt"></i> </button>
-                    <button type="button" class="btn btn-secondary" title="Send @ email"><i class="fas fa-envelope"></i>  </button>
-                    <button type="button" class="btn btn-secondary" title="Send SMS"><i class="fas fa-comments"></i> </button>
+                    <button type="button" class="btn btn-secondary" placement="left" ngbTooltip="Add to calender"><i class="fas fa-calendar-alt"></i> </button>
+                    <button type="button" class="btn btn-secondary" placement="left" ngbTooltip="Send an email"><i class="fas fa-envelope"></i>  </button>
+                    <button type="button" class="btn btn-secondary" placement="left" ngbTooltip="Send SMS"><i class="fas fa-comments"></i> </button>
                 </div> 
           </div>
            <!-- {{ item.data | json }} -->
