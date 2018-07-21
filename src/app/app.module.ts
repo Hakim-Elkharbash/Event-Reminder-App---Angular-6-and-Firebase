@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddtodoComponent } from './addtodo/addtodo.component';
 import { ViewtodolistComponent } from './viewtodolist/viewtodolist.component';
 import { TodosettingComponent } from './todosetting/todosetting.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TodosettingComponent } from './todosetting/todosetting.component';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

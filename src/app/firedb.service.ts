@@ -20,7 +20,6 @@ export class FiredbService {
         )
       );
     
-   console.log(this.todosItems)
   }
 
   viewtodolist(){

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FiredbService } from '../firedb.service';
-//import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-viewtodolist',
@@ -11,23 +11,24 @@ import { FiredbService } from '../firedb.service';
 
 export class ViewtodolistComponent implements OnInit {
   todosItems: Object;
+  closeResult: string;
 
-  constructor(private todoAction: FiredbService) {
+  constructor(private todoAction: FiredbService, private modalService: NgbModal) {
     this.todosItems = this.todoAction.viewtodolist()
-  //this.modalService.open("#DelModal")
   }
 
   ngOnInit() {
    
   }
  
-  deltodoitem(itemid: any){
-    this.todoAction.deltodoitem(itemid)
+  deltodoitemConfirmed(content: any, itemid: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      if (result === "confirmed") 
+        this.todoAction.deltodoitem(itemid)   
+    }, (error) => {
+      //alert("cross click")
+    });
   }
-
-
-
-
 
   
 }
