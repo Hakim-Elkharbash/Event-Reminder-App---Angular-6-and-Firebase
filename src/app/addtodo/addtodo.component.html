@@ -1,3 +1,103 @@
-<p>
-  addtodo works!
-</p>
+<br>
+<div class="container">
+  <div class="card card-outline-secondary">
+      <div class="card-header">
+          <h4 class="mb-0">ِAdd New TO-DO..</h4>
+      </div>
+      <div class="card-body">
+          <form class="form" role="form" autocomplete="off" name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+              <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label">Date & Time:</label>
+                 
+                  <div class="input-group col-lg-9">
+                      <input 
+                            class="form-control" 
+                            name="dp" 
+                            readonly
+                            required
+                            style="background-color: white"
+                            placeholder="yyyy-mm-dd"
+                            [(ngModel)]="model.dp" 
+                            ngbDatepicker 
+                            #d="ngbDatepicker"  
+                            #dp="ngModel"  
+                            [ngClass]="{
+                                'is-invalid': f.submitted && dp.invalid
+                            }">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </button>
+                            </div>
+                            <div *ngIf="f.submitted && dp.invalid" class="invalid-feedback">
+                                    <div *ngIf="dp.errors.required"><span class="badge badge-danger"> <i class="fas fa-times"></i> Date is required. </span></div>
+                            </div>
+
+                    </div>
+                  
+              </div>
+
+            
+              <div class="form-group row">
+                
+                  <label class="col-lg-3 col-form-label form-control-label">Description:</label>
+                  <div class="col-lg-9">
+                      <textarea 
+                            class="form-control" 
+                            name="description" 
+                            rows="6" 
+                            required
+                            placeholder="Enter your TO-Do item.."
+                            [(ngModel)]="model.description" 
+                            #description="ngModel"
+                            [ngClass]="{
+                                'is-invalid': f.submitted && description.invalid
+                            }">
+                        </textarea>
+                        <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
+                            <div *ngIf="description.errors.required"><span class="badge badge-danger"> <i class="fas fa-times"></i> Description is required. </span></div>
+                        </div>
+                    </div>
+              </div>
+
+
+              <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label">Status:</label>
+                  <div class="col-lg-9">
+                      <select 
+                            name="status" 
+                            class="form-control" 
+                            required
+                            [(ngModel)]="model.status" 
+                            #status="ngModel"
+                            [ngClass]="{
+                                'is-invalid': f.submitted && status.invalid
+                            }">
+                            <option *ngFor="let st of statusList" [ngValue]="st">{{ st }}</option>
+                      </select>
+                      <div *ngIf="f.submitted && status.invalid" class="invalid-feedback">
+                            <div *ngIf="status.errors.required"><span class="badge badge-danger"> <i class="fas fa-times"></i> Status is required. </span></div>
+                       </div>
+                  </div>
+              </div>
+             
+              <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label"></label>
+                  <div class="col-lg-9">
+                      <input type="submit" class="btn btn-dark" value="Add To-DO" >
+                      &nbsp;
+                      <input type="reset" class="btn btn-outline-info" value="Cancel">
+
+
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+<!-- Show form data
+<pre>{{ f.value | json }}</pre>
+<pre>{{ f.controls.status.valid }}</pre> 
+-->

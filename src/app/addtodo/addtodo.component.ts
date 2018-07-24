@@ -7,12 +7,19 @@ import { FiredbService } from '../firedb.service';
   styleUrls: ['./addtodo.component.scss']
 })
 export class AddtodoComponent implements OnInit {
+  statusList: string[] = ['Pending', 'Completed'];
+  model: any = {};
 
   constructor(private todoAction: FiredbService) {
-     this.todoAction.addtodoitem()
+
   }
 
   ngOnInit() {
+  }
+
+  onSubmit(){
+    console.log(this.model)
+    this.todoAction.addtodoitem()
   }
 
 }
