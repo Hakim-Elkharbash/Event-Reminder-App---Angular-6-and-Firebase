@@ -26,9 +26,9 @@ export class FiredbService {
     return this.todosItems;
   }
 
-  addtodoitem(){
+  addtodoitem(itemDate:any, itemDes:any, itemSt: any){
     //this.todosItemsRef = this.todoDB.list('todos');
-    this.todosItemsRef.push({"flag":"pandding","date":"7/7/2018","item":"Check my email"});
+    this.todosItemsRef.push({"flag":itemSt,"date":itemDate,"item":itemDes});
   }
 
   deltodoitem(itemid: any){

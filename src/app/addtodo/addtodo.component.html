@@ -30,7 +30,7 @@
                                 </button>
                             </div>
                             <div *ngIf="f.submitted && dp.invalid" class="invalid-feedback">
-                                    <div *ngIf="dp.errors.required"><span class="badge badge-danger"> <i class="fas fa-times"></i> Date is required. </span></div>
+                                    <div *ngIf="dp.errors.required"> <i class="fas fa-times-circle"></i> Date is required. </div>
                             </div>
 
                     </div>
@@ -55,7 +55,7 @@
                             }">
                         </textarea>
                         <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
-                            <div *ngIf="description.errors.required"><span class="badge badge-danger"> <i class="fas fa-times"></i> Description is required. </span></div>
+                            <div *ngIf="description.errors.required"> <i class="fas fa-times-circle"></i> Description is required. </div>
                         </div>
                     </div>
               </div>
@@ -76,7 +76,7 @@
                             <option *ngFor="let st of statusList" [ngValue]="st">{{ st }}</option>
                       </select>
                       <div *ngIf="f.submitted && status.invalid" class="invalid-feedback">
-                            <div *ngIf="status.errors.required"><span class="badge badge-danger"> <i class="fas fa-times"></i> Status is required. </span></div>
+                            <div *ngIf="status.errors.required"> <i class="fas fa-times-circle"></i> Status is required. </div>
                        </div>
                   </div>
               </div>

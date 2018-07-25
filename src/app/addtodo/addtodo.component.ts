@@ -19,7 +19,7 @@ export class AddtodoComponent implements OnInit {
 
   onSubmit(){
     console.log(this.model)
-    this.todoAction.addtodoitem()
+    this.todoAction.addtodoitem(this.model.dp,this.model.description,this.model.status)
   }
 
 }

@@ -2,7 +2,7 @@
           <div class="card text-white border-info bg-dark mb-3" *ngFor="let item of todosItems | async">
             <div class="card-header">
                 <div class="btn-group pull-right" role="group" aria-label="Basic example">   
-                    {{ item.date }}
+                    {{ item.date.month }}/{{ item.date.day }}/{{ item.date.year }}
                 </div>
                 <div class=" float-right"><span (click)="deltodoitemConfirmed(content,item.key)" placement="left" ngbTooltip="Delete item"> <i class="fas fa-trash-alt"></i></span></div>
             </div>

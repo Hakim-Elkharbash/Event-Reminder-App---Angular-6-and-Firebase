@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FiredbService } from '../firedb.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-viewtodolist',
