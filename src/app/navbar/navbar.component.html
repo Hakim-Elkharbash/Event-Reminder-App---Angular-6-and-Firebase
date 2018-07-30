@@ -24,10 +24,15 @@
           </div>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link" routerLink="todosetting"> <i class="fas fa-info-circle"></i> Info</a>
+          <a class="nav-link disabled" routerLink=""> <i class="fas fa-info-circle"></i> Settings</a>
         </li>
       </ul>
 
+  
+      <button type="button" class="btn btn-secondary" routerLink="addtodo" placement="left" ngbTooltip="Click to add new item">
+          Number of items <span class="badge badge-light">{{countItems}}</span>
+      </button>
+      &nbsp;&nbsp;
       <h4><span class="badge badge-dark border border-success"><i class="fab fa-github"></i> GitHub</span></h4> 
 
       <!-- <form class="form-inline my-2 my-lg-0">

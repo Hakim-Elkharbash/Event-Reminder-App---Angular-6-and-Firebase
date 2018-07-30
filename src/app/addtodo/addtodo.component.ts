@@ -29,7 +29,9 @@ export class AddtodoComponent implements OnInit {
         description:null,
         status:null
       })  */
-      this.toastr.success('Item has been added.', 'To-Do List'); // Show message
+      this.toastr.success('Item has been added.', 'To-Do List',{
+        positionClass: 'toast-bottom-right',
+      }); // Show message
     }else{
       this.toastr.error('Input error.', 'To-Do List'); // Show message
     }

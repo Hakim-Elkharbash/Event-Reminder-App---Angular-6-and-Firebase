@@ -13,13 +13,13 @@ export class FiredbService {
 
   constructor(private todoDB: AngularFireDatabase) {
 
-      this.todosItemsRef = todoDB.list('todos');
+    this.todosItemsRef = todoDB.list('todos');
       this.todosItems = this.todosItemsRef.snapshotChanges().pipe(
-        map(changes => 
+        map(changes =>
           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
         )
       );
-    
+       
   }
 
   viewtodolist(){
@@ -41,7 +41,6 @@ export class FiredbService {
     this.todosItemsRef.remove()
     .catch(error => this.handleError(error));
   }
-
 
 
   updatetodoitem(itemid: any, st: string){

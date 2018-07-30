@@ -22,6 +22,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { LoadingspinnerComponent } from './loadingspinner/loadingspinner.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ToastrModule } from 'ngx-toastr';
     NavbarComponent,
     AddtodoComponent,
     ViewtodolistComponent,
-    TodosettingComponent
+    TodosettingComponent,
+    LoadingspinnerComponent
   ],
   imports: [
     BrowserModule,

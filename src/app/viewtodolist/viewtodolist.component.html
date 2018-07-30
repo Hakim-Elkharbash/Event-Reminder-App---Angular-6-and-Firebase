@@ -1,3 +1,7 @@
+<div *ngIf="(todosItems | async)?.length==0">
+    Add new
+</div>
+
 <div class="container">
           <div class="card text-white border-info bg-dark mb-3" *ngFor="let item of todosItems | async" 
             [ngClass]="{'text-info':item.flag === 'Completed'}"
@@ -40,6 +44,7 @@
         </div>
 </div>
 
+<app-loadingspinner *ngIf="loadSpinner">{{loadSpinner}}</app-loadingspinner>
 
 
 <!-- Modal to confirm deletion-->
