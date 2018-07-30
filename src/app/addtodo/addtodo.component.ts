@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FiredbService } from '../firedb.service';
+import { Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-addtodo',
@@ -9,17 +11,33 @@ import { FiredbService } from '../firedb.service';
 export class AddtodoComponent implements OnInit {
   statusList: string[] = ['Pending', 'Completed'];
   model: any = {};
+  @ViewChild("f") accessAddForm: any;
 
-  constructor(private todoAction: FiredbService) {
+  constructor(private todoAction: FiredbService, private router: Router, private toastr:ToastrService) {
 
   }
+
 
   ngOnInit() {
   }
 
   onSubmit(){
-    console.log(this.model)
-    this.todoAction.addtodoitem(this.model.dp,this.model.description,this.model.status)
+    if (this.accessAddForm.valid){
+      this.todoAction.addtodoitem(this.model.dt.toLocaleString(),this.model.description,this.model.status)
+      /* this.accessAddForm.reset({
+        dt:null,
+        description:null,
+        status:null
+      })  */
+      this.toastr.success('Item has been added.', 'To-Do List'); // Show message
+    }else{
+      this.toastr.error('Input error.', 'To-Do List'); // Show message
+    }
+  }
+
+
+  gotosomewhere(){
+    this.router.navigate(['']);
   }
 
 }

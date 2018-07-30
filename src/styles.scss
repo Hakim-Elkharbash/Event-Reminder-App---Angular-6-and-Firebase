@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~ng-pick-datetime/assets/style/picker.min.css"; /* to import css od time and date picker*/
+@import "node_modules/ngx-toastr/toastr.css";
 body{
     background-color: #f9f9f9;
 }

@@ -28,7 +28,7 @@ export class FiredbService {
 
   addtodoitem(itemDate:any, itemDes:any, itemSt: any){
     //this.todosItemsRef = this.todoDB.list('todos');
-    this.todosItemsRef.push({"flag":itemSt,"date":itemDate,"item":itemDes});
+    this.todosItemsRef.push({"date":itemDate,"item":itemDes,"flag":itemSt,"lastOp":new Date().toLocaleString()});
   }
 
   deltodoitem(itemid: any){
@@ -40,6 +40,14 @@ export class FiredbService {
   delalltodoitems(){
     this.todosItemsRef.remove()
     .catch(error => this.handleError(error));
+  }
+
+
+
+  updatetodoitem(itemid: any, st: string){
+    if (st === "Pending") {st = "Completed"}else{st = "Pending"}
+    this.todosItemsRef.update(itemid,{ "flag": st,"lastOp":new Date().toLocaleString()})
+      .catch(error => this.handleError(error));
   }
 
   //----- to handle errors

@@ -18,6 +18,10 @@ import { TodosettingComponent } from './todosetting/todosetting.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -26,8 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NavbarComponent,
     AddtodoComponent,
     ViewtodolistComponent,
-    TodosettingComponent,
-    AddtodoComponent
+    TodosettingComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AngularFireDatabaseModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

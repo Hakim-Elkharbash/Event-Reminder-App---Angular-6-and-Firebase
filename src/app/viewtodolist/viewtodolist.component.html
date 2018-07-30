@@ -1,10 +1,14 @@
 <div class="container">
-          <div class="card text-white border-info bg-dark mb-3" *ngFor="let item of todosItems | async">
+          <div class="card text-white border-info bg-dark mb-3" *ngFor="let item of todosItems | async" 
+            [ngClass]="{'text-info':item.flag === 'Completed'}"
+          >
             <div class="card-header">
                 <div class="btn-group pull-right" role="group" aria-label="Basic example">   
-                    {{ item.date.month }}/{{ item.date.day }}/{{ item.date.year }}
+                    {{ item.date }}
                 </div>
-                <div class=" float-right"><span (click)="deltodoitemConfirmed(content,item.key)" placement="left" ngbTooltip="Delete item"> <i class="fas fa-trash-alt"></i></span></div>
+                <div class=" float-right">
+                    <span (click)="deltodoitemConfirmed(content,item.key)" placement="left" ngbTooltip="Delete item"> <i class="fas fa-trash-alt"></i></span>
+                </div>
             </div>
 
             <div class="card-body">
@@ -14,10 +18,17 @@
 
             <div class="card-footer">
                 <div class="btn-group pull-right" role="group" aria-label="Basic example"> 
-                    <button type="button" class="btn btn-success disabled"><i class="fas fa-clock"></i> {{ item.flag }}</button>
-                    <button type="button" class="btn btn-outline-info"><i class="fas fa-check"></i> Done</button>
-
+                    <button type="button" class="btn btn-success disabled">
+                        <i class="fas fa-calendar-check"></i> {{ item.flag }}
+                    </button>
+                    <button type="button" class="btn btn-outline-info" (click)="updateTodoitem(item.key,item.flag)" ngbTooltip="Update item">
+                        <div *ngIf="item.flag  === 'Pending'; else showPending">
+                            <i class="fas fa-check"></i> Complete
+                        </div>
+                        <ng-template  #showPending><i class="fas fa-undo"></i> Pending</ng-template>
+                    </button>
                 </div>
+                <span class="badge badge-dark" style="color: teal; font-weight: 100; font-style:italic !important"> Last Update: {{ item.lastOp }}</span>
 
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-secondary" placement="left" ngbTooltip="Add to calender"><i class="fas fa-calendar-alt"></i> </button>

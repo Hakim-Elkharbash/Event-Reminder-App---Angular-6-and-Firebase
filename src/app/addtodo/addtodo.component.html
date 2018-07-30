@@ -5,39 +5,43 @@
           <h4 class="mb-0">ِAdd New TO-DO..</h4>
       </div>
       <div class="card-body">
-          <form class="form" role="form" autocomplete="off" name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+          <form 
+            class="form" 
+            role="form" 
+            autocomplete="off" 
+            name="form"  
+            #f="ngForm" 
+            (ngSubmit)="onSubmit()" 
+            novalidate 
+          >
               <div class="form-group row">
-                  <label class="col-lg-3 col-form-label form-control-label">Date & Time:</label>
-                 
+                  <label class="col-lg-3 col-form-label form-control-label">Date & Time:</label>      
                   <div class="input-group col-lg-9">
-                      <input 
+                        <input 
                             class="form-control" 
-                            name="dp" 
-                            readonly
+                            name="dt" 
                             required
                             style="background-color: white"
-                            placeholder="yyyy-mm-dd"
-                            [(ngModel)]="model.dp" 
-                            ngbDatepicker 
-                            #d="ngbDatepicker"  
-                            #dp="ngModel"  
+                            placeholder="mm-dd-yyyy, hh:mm"
+                            [(ngModel)]="model.dt"
+                            [owlDateTimeTrigger]="dt" 
+                            [owlDateTime]="dt"
+                            #dtv="ngModel" 
                             [ngClass]="{
-                                'is-invalid': f.submitted && dp.invalid
-                            }">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-                                    <i class="fas fa-calendar-alt"></i>
-                                </button>
-                            </div>
-                            <div *ngIf="f.submitted && dp.invalid" class="invalid-feedback">
-                                    <div *ngIf="dp.errors.required"> <i class="fas fa-times-circle"></i> Date is required. </div>
+                                'is-invalid': f.submitted && dtv.invalid
+                            }" 
+                        >
+                            <owl-date-time #dt></owl-date-time>
+                        
+                            <div *ngIf="f.submitted && dtv.invalid" class="invalid-feedback">
+                                    <div *ngIf="dtv.errors.required"> <i class="fas fa-times-circle"></i> Date & time are required. </div>
                             </div>
 
-                    </div>
-                  
+                    
+                  </div>
               </div>
 
-            
+
               <div class="form-group row">
                 
                   <label class="col-lg-3 col-form-label form-control-label">Description:</label>
@@ -52,11 +56,17 @@
                             #description="ngModel"
                             [ngClass]="{
                                 'is-invalid': f.submitted && description.invalid
-                            }">
+                            }"
+                        >
                         </textarea>
                         <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
                             <div *ngIf="description.errors.required"> <i class="fas fa-times-circle"></i> Description is required. </div>
                         </div>
+                        <!-- check errors
+                            {{description.dirty}}
+                            {{description.valid}}
+                            {{description.touched}} 
+                        -->
                     </div>
               </div>
 
@@ -72,7 +82,8 @@
                             #status="ngModel"
                             [ngClass]="{
                                 'is-invalid': f.submitted && status.invalid
-                            }">
+                            }"
+                        >
                             <option *ngFor="let st of statusList" [ngValue]="st">{{ st }}</option>
                       </select>
                       <div *ngIf="f.submitted && status.invalid" class="invalid-feedback">
@@ -84,20 +95,21 @@
               <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label"></label>
                   <div class="col-lg-9">
-                      <input type="submit" class="btn btn-dark" value="Add To-DO" >
-                      &nbsp;
-                      <input type="reset" class="btn btn-outline-info" value="Cancel">
-
-
+                        <input type="submit" class="btn btn-dark" value="Add To-DO" >
+                        <!-- <input type="submit" [disabled]="!f.valid" class="btn btn-dark" value="Add To-DO" > -->
+                        &nbsp;
+                      <input type="button" class="btn btn-outline-info" value="Cancel. --> My list"  (click)="gotosomewhere()">
                   </div>
-              </div>
+              </div>              
           </form>
       </div>
   </div>
 </div>
 
 
-<!-- Show form data
-<pre>{{ f.value | json }}</pre>
-<pre>{{ f.controls.status.valid }}</pre> 
--->
+
+
+
+<!-- show inputs
+    <pre>{{ f.value | json }}</pre>
+ -->
