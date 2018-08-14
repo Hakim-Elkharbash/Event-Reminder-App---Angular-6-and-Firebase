@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top margin-border-top">
-    <a class="navbar-brand" href="#">To-Do List</a>
+    <a class="navbar-brand" href="#">ToDos.LY</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink=""><i class="fas fa-clipboard-list"></i> My List <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink=""><i class="fas fa-clipboard-list"></i> My Events <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="addtodo"><i class="fas fa-plus"></i> Add</a>
@@ -30,7 +30,7 @@
 
   
       <button type="button" class="btn btn-secondary" routerLink="addtodo" placement="left" ngbTooltip="Click to add new item">
-          Number of items <span class="badge badge-light">{{countItems}}</span>
+          Events <span class="badge badge-light">{{countItems}}</span>
       </button>
       &nbsp;&nbsp;
       <h4><span class="badge badge-dark border border-success"><i class="fab fa-github"></i> GitHub</span></h4> 
@@ -45,17 +45,17 @@
 
 
 
-  <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+  <nav class="navbar fixed-bottom navbar-expand navbar-dark bg-dark">
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+              <input [disabled]="currentUrl != '/'" class="form-control mr-sm-2" type="search" placeholder="Search.." aria-label="Search">
+              <!-- <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button> -->
           </form>
           &nbsp;&nbsp;
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" >
          <li class="nav-item dropup">
-            <button class="btn btn-outline-success dropdown-toggle" routerLink="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button [disabled]="currentUrl != '/'" class="btn btn-outline-success dropdown-toggle" routerLink="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Sort
             </button>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -67,7 +67,7 @@
           </li> 
         </ul>
     
-        <button class="btn btn-outline-danger my-2 my-sm-0" (click)="delalltodoitemsConfirmed(content)" placement="left" ngbTooltip="Delete all item">Delete All</button>
+        <button [disabled]="currentUrl != '/'" class="btn btn-outline-danger my-2 my-sm-0" (click)="delalltodoitemsConfirmed(content)" placement="left" ngbTooltip="Delete all item">Delete All</button>
 
       </div>
   </nav>
@@ -75,15 +75,10 @@
 
 
 
-
-
-
-
-
   <!-- Modal to confirm deletion-->
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">To-Do List</h4>
+      <h4 class="modal-title" id="modal-basic-title">Event Reminder</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
           <span aria-hidden="true">&times;</span>
       </button>

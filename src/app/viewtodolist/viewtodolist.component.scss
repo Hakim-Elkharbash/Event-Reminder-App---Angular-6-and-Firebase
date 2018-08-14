@@ -1,0 +1,52 @@
+.Stime{
+    color: #f1f1f1;
+    font-size: 0.95em;
+    padding-right: 10px
+}
+
+.Etime{
+    color: #f1f1f1;
+    font-size: 0.95em;
+    padding-left: 10px;
+    margin-right: 15px;
+    
+}
+
+.theTO{
+    border: dotted gray 1px;
+    padding-right: 2px;
+    padding-left: 2px;
+    border-radius: 2px;
+    font-weight: bold;
+    vertical-align: middle
+}
+
+.DurSpan{
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 3px;
+    background-color: gray
+}
+
+.DTclass{
+    border-radius: 5px;
+    font-style: bold;
+    font-size: 1.2em;
+    text-align: center;
+    vertical-align: middle !important;
+    padding: 20px;
+    background-size:cover; 
+    background-image:url('/assets/backImage.png');
+    background-position:50% 50%;
+    height: 100%;
+    width: 100%;
+    border: dotted gray 1px;
+
+}
+
+mgl-map {
+    height: 300px;
+    width: 100%;
+    border: gray solid 4px;
+    border-radius: 5px;
+}

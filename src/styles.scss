@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+// for date and time picker
 @import "~ng-pick-datetime/assets/style/picker.min.css"; /* to import css od time and date picker*/
+
+// for toaster (notifications)
 @import "node_modules/ngx-toastr/toastr.css";
+
+// for maps (open map)
+@import "~mapbox-gl/dist/mapbox-gl.css";
+@import "~@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css";
+
 body{
     background-color: #f9f9f9;
 }

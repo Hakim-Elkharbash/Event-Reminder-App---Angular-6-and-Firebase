@@ -1,7 +1,7 @@
 <div *ngIf="(todosItems | async)?.length==0">
     <div class="container">
         <main role="main" class="inner cover">
-                <h1 class="cover-heading">Create your To-Do list</h1>
+                <h1 class="cover-heading">Create your Event Reminder</h1>
                 <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
                 <p class="lead">
                   <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
@@ -16,16 +16,25 @@
           >
             <div class="card-header">
                 <div class="btn-group pull-right" role="group" aria-label="Basic example">   
-                    {{ item.date }}
+                    <span class="Stime" placement="bottom" ngbTooltip="{{ item.Sdate | date:'full' }}">{{ item.Sdate | date:'MMM d, yy ~ H:m'}}</span> <span class="theTO" placement="bottom" ngbTooltip="{{ item.duration }}">TO</span> <span class="Etime" placement="bottom" ngbTooltip="{{ item.Edate | date:'full' }}">{{ item.Edate | date:'MMM d, yy ~ H:m' }}</span> 
                 </div>
                 <div class=" float-right">
-                    <span (click)="deltodoitemConfirmed(content,item.key)" placement="left" ngbTooltip="Delete item"> <i class="fas fa-trash-alt"></i></span>
+                    <span (click)="deltodoitemConfirmed(content,item.key)" placement="left" ngbTooltip="Delete event"> <i class="fas fa-trash-alt"></i></span>
                 </div>
             </div>
 
             <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-10 b">
+                        <p class="card-text" style="padding: 5px;">{{ item.item }} </p>
+                    </div>
+                    <div class="col-sm-2  DTclass" placement="top" ngbTooltip="Event Duration">
+                            <i class="far far fa-calendar-alt fa-3x" style="color: gray; margin-bottom: 10px;"></i>
+                                <br>
+                            <span class="DurSpan"><b>{{ item.duration }} </b></span>
+                    </div>
+                </div>
               <!-- <h5 class="card-title">{{ item.date }}</h5> -->
-              <p class="card-text">{{ item.item }} </p>
             </div>
 
             <div class="card-footer">
@@ -33,23 +42,70 @@
                     <button type="button" class="btn btn-success disabled">
                         <i class="fas fa-calendar-check"></i> {{ item.flag }}
                     </button>
-                    <button type="button" class="btn btn-outline-info" (click)="updateTodoitem(item.key,item.flag)" ngbTooltip="Update item">
-                        <div *ngIf="item.flag  === 'Pending'; else showPending">
+                    <button type="button" class="btn btn-outline-info" (click)="updateTodoitem(item.key,item.flag)" ngbTooltip="Update event">
+                        <div *ngIf="item.flag  === 'New'; else showNew">
                             <i class="fas fa-check"></i> Complete
                         </div>
-                        <ng-template  #showPending><i class="fas fa-undo"></i> Pending</ng-template>
+                        <ng-template  #showNew><i class="fas fa-undo"></i> New</ng-template>
                     </button>
                 </div>
-                <span class="badge badge-dark" style="color: teal; font-weight: 100; font-style:italic !important"> Last Update: {{ item.lastOp }}</span>
+                <span class="badge badge-dark" style="color: teal; font-weight: 100; font-style:italic !important; padding-left: 10px;" ngbTooltip="Updated on: {{ item.lastOp }}"> <i class="fas fa-user-edit"></i>
+                    {{myDate | amCalendar}}
+                </span>
+                
 
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary" placement="left" ngbTooltip="Add to calender"><i class="fas fa-calendar-alt"></i> </button>
-                    <button type="button" class="btn btn-secondary" placement="left" ngbTooltip="Send an email"><i class="fas fa-envelope"></i>  </button>
-                    <button type="button" class="btn btn-secondary" placement="left" ngbTooltip="Send SMS"><i class="fas fa-comments"></i> </button>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placement="left" ngbTooltip="Add to calender">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a [href]="googleCalendarEventUrl" (click)="addtocal(item.Sdate, item.Edate, item.item)" target="_blank" class="dropdown-item"><i class="fab fa-google"></i> Google</a>
+                            <a [href]="yahooCalendarEventUrl" (click)="addtocal(item.Sdate, item.Edate, item.item)" target="_blank" class="dropdown-item"><i class="fab fa-yahoo"></i> Yahoo</a>
+                            <a [href]="outlookCalendarEventUrl" (click)="addtocal(item.Sdate, item.Edate, item.item)" target="_blank" class="dropdown-item"><i class="fab fa-windows"></i> Outlook</a>
+                            <a [href]="outlookLiveCalendarEventUrl" (click)="addtocal(item.Sdate, item.Edate, item.item)" target="_blank" class="dropdown-item"><i class="fab fa-windows"></i> Outlook Live</a>
+                            <a [href]="iCalendarCalendarEventUrl" (click)="addtocal(item.Sdate, item.Edate, item.item)" target="_blank" class="dropdown-item"><i class="fab fa-apple"></i> iCalendar</a>
+                        </div>
+                    </div>
+                    <button type="button" (click)="sendemail()" class="btn btn-secondary" placement="left"  ngbTooltip="Send an email"><i class="fas fa-envelope"></i>  </button>
+                    <button type="button" (click)="gpsLoc(item.location)" class="btn btn-secondary" placement="left" ngbTooltip="Event location"  [disabled]="item.location === 'None'"><i class="fas fa-map-marker-alt"></i></button>
+                    <!-- <button type="button" class="btn btn-secondary" placement="left" ngbTooltip="Send SMS"><i class="fas fa-comments"></i> </button> -->
                 </div> 
           </div>
-           <!-- {{ item.data | json }} -->
+          <div class="card-footer">
+            <div class="card-body">
+
+                <mgl-map 
+                    [style]="'mapbox://styles/mapbox/dark-v9'"
+                    [zoom]="[8.5]"
+                    [center]="[-82.452606, 27.964157]"
+                    [attributionControl]= false
+
+                >
+                    <mgl-marker
+                    [lngLat]="[item.Longitude, item.Latitude]"
+                    >  
+                    </mgl-marker>
+
+                    <mgl-control 
+                        mglFullscreen
+                    >
+                    </mgl-control>
+
+                    <mgl-control
+                        mglNavigation
+                    >
+                    </mgl-control>
+                   
+                </mgl-map>
+        
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+           <!-- {{ item.data | json }} -->           
         </div>
+
+        
 </div>
 
 <app-loadingspinner *ngIf="loadSpinner">{{loadSpinner}}</app-loadingspinner>
@@ -58,13 +114,13 @@
 <!-- Modal to confirm deletion-->
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">To-Do List</h4>
+      <h4 class="modal-title" id="modal-basic-title">Event Reminder</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
           <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-        Do you want to delete this item(s).
+        Do you want to delete this event(s).
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="c('confirmed')">YES</button>

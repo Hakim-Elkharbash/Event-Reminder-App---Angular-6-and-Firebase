@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,9 +27,9 @@ export class FiredbService {
     return this.todosItems;
   }
 
-  addtodoitem(itemDate:any, itemDes:any, itemSt: any){
+  addtodoitem(itemSDate:any, itemEDate:any, duration:string, itemDes:any, itemLat: number, itemLng: number, itemSt: any){
     //this.todosItemsRef = this.todoDB.list('todos');
-    this.todosItemsRef.push({"date":itemDate,"item":itemDes,"flag":itemSt,"lastOp":new Date().toLocaleString()});
+    this.todosItemsRef.push({"Sdate":itemSDate,"Edate":itemEDate, "duration":duration,"item":itemDes,"Latitude":itemLat,"Longitude":itemLng,"flag":itemSt,"lastOp":new Date().toLocaleString()});
   }
 
   deltodoitem(itemid: any){
@@ -44,7 +45,7 @@ export class FiredbService {
 
 
   updatetodoitem(itemid: any, st: string){
-    if (st === "Pending") {st = "Completed"}else{st = "Pending"}
+    if (st === "Coming") {st = "Completed"}else{st = "Coming"}
     this.todosItemsRef.update(itemid,{ "flag": st,"lastOp":new Date().toLocaleString()})
       .catch(error => this.handleError(error));
   }

@@ -19,10 +19,18 @@ import { TodosettingComponent } from './todosetting/todosetting.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // it will serve calendar animation and app animations it self as well. 
 
 import { ToastrModule } from 'ngx-toastr';
 import { LoadingspinnerComponent } from './loadingspinner/loadingspinner.component';
+
+import { NgAddToCalendarModule } from '@trademe/ng-add-to-calendar';
+
+import { HttpClientModule } from '@angular/common/http'
+
+import { MomentModule } from 'ngx-moment';
+
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 
 @NgModule({
@@ -32,7 +40,8 @@ import { LoadingspinnerComponent } from './loadingspinner/loadingspinner.compone
     AddtodoComponent,
     ViewtodolistComponent,
     TodosettingComponent,
-    LoadingspinnerComponent
+    LoadingspinnerComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -45,7 +54,14 @@ import { LoadingspinnerComponent } from './loadingspinner/loadingspinner.compone
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgAddToCalendarModule,
+    HttpClientModule,
+    MomentModule,
+    NgxMapboxGLModule.withConfig({
+      accessToken: 'pk.eyJ1IjoibGlieWFwYWdlcyIsImEiOiJjamtvYmE0ZWUxNm02M2x0aDR0MnZwanhzIn0.9N_nairWx_XZyxhQQCS2hg', // Can also be set per map (accessToken input of mgl-map)
+      // geocoderAccessToken: 'TOKEN' // Optionnal, specify if different from the map access token, can also be set per mgl-geocoder (accessToken input of mgl-geocoder)
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

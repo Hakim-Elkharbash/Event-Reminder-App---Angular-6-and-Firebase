@@ -1,0 +1,20 @@
+.TextCounter{
+    font-size: 0.75em; 
+    text-align: right; 
+    color: gray;
+    padding: 5px;
+}
+
+.TextLocation{
+    font-size: 0.75em; 
+    color: gray;
+    padding: 5px;
+    font-style: italic;
+}
+
+mgl-map {
+    height: 200px;
+    width: 100%;
+    border: #e7e3e3 solid 4px;
+    border-radius: 5px;
+}

@@ -2,7 +2,7 @@
 <div class="container">
   <div class="card card-outline-secondary">
       <div class="card-header">
-          <h4 class="mb-0">ِAdd New TO-DO..</h4>
+          <h4 class="mb-0">Add New Event..</h4>
       </div>
       <div class="card-body">
           <form 
@@ -14,44 +14,81 @@
             (ngSubmit)="onSubmit()" 
             novalidate 
           >
-              <div class="form-group row">
-                  <label class="col-lg-3 col-form-label form-control-label">Date & Time:</label>      
-                  <div class="input-group col-lg-9">
-                        <input 
-                            class="form-control" 
-                            name="dt" 
-                            required
-                            style="background-color: white"
-                            placeholder="mm-dd-yyyy, hh:mm"
-                            [(ngModel)]="model.dt"
-                            [owlDateTimeTrigger]="dt" 
-                            [owlDateTime]="dt"
-                            #dtv="ngModel" 
-                            [ngClass]="{
-                                'is-invalid': f.submitted && dtv.invalid
-                            }" 
-                        >
-                            <owl-date-time #dt></owl-date-time>
-                        
-                            <div *ngIf="f.submitted && dtv.invalid" class="invalid-feedback">
-                                    <div *ngIf="dtv.errors.required"> <i class="fas fa-times-circle"></i> Date & time are required. </div>
-                            </div>
 
-                    
-                  </div>
-              </div>
+
+
+
+
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label text-lg-right">Date and Time:</label> 
+                <div class="col-lg-9">  
+                    <div class="row">
+                        <div class="input-group col-lg-6">
+                                <input 
+                                class="form-control" 
+                                name="dts" 
+                                required
+                                style="background-color: white"
+                                placeholder="Start"
+                                [(ngModel)]="model.dtrange"
+                                [owlDateTimeTrigger]="dts" 
+                                [selectMode]="'rangeFrom'"
+                                [owlDateTime]="dts"
+                                #dtsv="ngModel" 
+                                [ngClass]="{
+                                    'is-invalid': f.submitted && dtsv.invalid
+                                }" 
+                            >
+                                <owl-date-time #dts></owl-date-time>
+                            
+                                <div *ngIf="f.submitted && dtsv.invalid" class="invalid-feedback">
+                                        <div *ngIf="dtsv.errors.required"> <i class="fas fa-times-circle"></i> Date & time are required. </div>
+                                </div>      
+
+                        </div>
+    
+                        <div class="input-group col-lg-6">
+                                <input 
+                                class="form-control" 
+                                name="dte" 
+                                required
+                                style="background-color: white"
+                                placeholder="End"
+                                [(ngModel)]="model.dtrange"
+                                [owlDateTimeTrigger]="dte" 
+                                [selectMode]="'rangeTo'"
+                                [owlDateTime]="dte"
+                                #dtev="ngModel" 
+                                [ngClass]="{
+                                    'is-invalid': f.submitted && dtev.invalid
+                                }" 
+                            >
+                                <owl-date-time #dte></owl-date-time>
+                            
+                                <div *ngIf="f.submitted && dtev.invalid" class="invalid-feedback">
+                                        <div *ngIf="dtev.errors.required"> <i class="fas fa-times-circle"></i> Date & time are required. </div>
+                                </div>       
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
 
               <div class="form-group row">
                 
-                  <label class="col-lg-3 col-form-label form-control-label">Description:</label>
+                  <label class="col-lg-3 col-form-label form-control-label text-lg-right">Event Description:</label>
                   <div class="col-lg-9">
                       <textarea 
                             class="form-control" 
                             name="description" 
                             rows="6" 
                             required
-                            placeholder="Enter your TO-Do item.."
+                            ngTrim="false" 
+                            maxlength="1000"
+                            placeholder="Event description.."
                             [(ngModel)]="model.description" 
                             #description="ngModel"
                             [ngClass]="{
@@ -59,6 +96,7 @@
                             }"
                         >
                         </textarea>
+                        <div class="TextCounter">{{ model.description?.length }} <span *ngIf="model.description?.length  > 0">/1000</span></div>  <!-- I uesd (?) safe operator to avoid: "Cannot read property 'length' of undefined" error caused by calling property for NOT exist property, having (?) guarantee not to call the right property if the left one is NOT existing -->
                         <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
                             <div *ngIf="description.errors.required"> <i class="fas fa-times-circle"></i> Description is required. </div>
                         </div>
@@ -70,35 +108,97 @@
                     </div>
               </div>
 
-
+<!--
               <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Status:</label>
                   <div class="col-lg-9">
-                      <select 
+                       <select 
                             name="status" 
                             class="form-control" 
                             required
+                            (ngModelChange)="onChange($event)"
                             [(ngModel)]="model.status" 
                             #status="ngModel"
                             [ngClass]="{
                                 'is-invalid': f.submitted && status.invalid
                             }"
                         >
-                            <option *ngFor="let st of statusList" [ngValue]="st">{{ st }}</option>
+                        <option value="null" [selected]=true>test</option>
+                        <option *ngFor="let st of statusList" [ngValue]="st" [selected]=true>{{ st }}</option>
                       </select>
                       <div *ngIf="f.submitted && status.invalid" class="invalid-feedback">
                             <div *ngIf="status.errors.required"> <i class="fas fa-times-circle"></i> Status is required. </div>
-                       </div>
+                      </div>
                   </div>
               </div>
-             
+ -->             
+
+
+    <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label text-lg-right">Location:</label> 
+        <div class="col-lg-9">  
+            <div  class="input-group">
+                <div class="input-group-prepend ">
+                    <div class="input-group-text"><i class="fas fa-thumbtack" (click)="ShowMap = !ShowMap" style="cursor: pointer;"  placement="top" ngbTooltip="Show/Hide the map"></i></div>
+                </div>
+                <input 
+                    class="form-control" 
+                    name="location" 
+                    readonly
+                    (click)="ShowMap = !ShowMap"
+                    placeholder="Enter correct location (Optional)"
+                    [(ngModel)]="model.location"
+                    #location="ngModel"
+                >
+                <div class="input-group-prepend ">
+                        <div class="input-group-text"><a class="badge badge-light" (click)="cleanGPS()" style="cursor: pointer;">Reset</a></div>
+                    </div>
+            </div>
+            <div class="TextLocation">Should be an accurate Latitude and Longitude (Click to show). <i class="fas fa-exclamation-circle" placement="right" ngbTooltip="I have removed (address autocomplete package) because it required Google API/ MapBox API which both of them is NOT free."></i></div>
+        
+                    <mgl-map 
+                    *ngIf = "ShowMap"
+                    [style] = "'mapbox://styles/mapbox/streets-v9'"
+                    [zoom] = "[9]"
+                    [center] = "[-82.452606, 27.964157]"
+                    [attributionControl] = false   
+                >
+                    <mgl-marker
+                        [lngLat]="[-82.452606, 27.964157]"
+                        [draggable]="true"
+                        (dragEnd)="onDragEnd($event)"
+                    >  
+                    </mgl-marker>
+                    <mgl-control 
+                        mglFullscreen
+                    >
+                    </mgl-control>
+
+                    <mgl-control
+                        mglNavigation
+                    >
+                    </mgl-control>
+                </mgl-map>
+
+        </div> 
+    </div>
+
+
+
+    
+
+
+
+
+
+
               <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label"></label>
                   <div class="col-lg-9">
-                        <input type="submit" class="btn btn-dark" value="Add To-DO" >
+                        <input type="submit" class="btn btn-dark" value="Add Event" >
                         <!-- <input type="submit" [disabled]="!f.valid" class="btn btn-dark" value="Add To-DO" > -->
                         &nbsp;
-                      <input type="button" class="btn btn-outline-info" value="Cancel. --> My list"  (click)="gotosomewhere()">
+                      <input type="button" class="btn btn-outline-info" value="My Events"  (click)="gotosomewhere()">
                   </div>
               </div>              
           </form>
@@ -110,6 +210,5 @@
 
 
 
-<!-- show inputs
-    <pre>{{ f.value | json }}</pre>
- -->
+     <!-- <pre>{{ f.value | json }}</pre>  -->
+
