@@ -21,9 +21,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() { // subscribe to the Observable at ngOnInit() in order to show the events number while rendering the view.
     this.todosItems = this.todoAction.viewtodolist()
-    this.todosItems.subscribe(result => {
-      this.countItems = result.length; // count the events which will be shown up to the right of the view.
-    });
+     this.todosItems.subscribe(result => {
+          this.countItems = result.length; // count the events which will be shown up to the right of the view.
+       }); 
+    
   }
 
   delalltodoitemsConfirmed(content: any) {

@@ -28,9 +28,8 @@
         </li>
       </ul>
 
-  
-      <button type="button" class="btn btn-secondary" routerLink="addtodo" placement="left" ngbTooltip="Click to add new item">
-          Events <span class="badge badge-light">{{countItems}}</span>
+        <button type="button" class="btn btn-secondary" routerLink="addtodo" placement="left" ngbTooltip="Click to add new item">
+          Events <span class="badge badge-light">{{ countItems }} </span>
       </button>
       &nbsp;&nbsp;
       <h4><span class="badge badge-dark border border-success"><i class="fab fa-github"></i> GitHub</span></h4> 
@@ -67,7 +66,7 @@
           </li> 
         </ul>
     
-        <button [disabled]="currentUrl != '/'" class="btn btn-outline-danger my-2 my-sm-0" (click)="delalltodoitemsConfirmed(content)" placement="left" ngbTooltip="Delete all item">Delete All</button>
+        <button [disabled]="currentUrl != '/'" class="btn btn-outline-danger my-2 my-sm-0" (click)="delalltodoitemsConfirmed(content)" placement="left" ngbTooltip="Delete all item">Delete All ({{ countItems }})</button>
 
       </div>
   </nav>

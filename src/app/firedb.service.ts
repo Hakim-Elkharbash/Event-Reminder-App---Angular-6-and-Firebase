@@ -45,7 +45,6 @@ export class FiredbService {
 
 
   updatetodoitem(itemid: any, st: string){
-    if (st === "Coming") {st = "Completed"}else{st = "Coming"}
     this.todosItemsRef.update(itemid,{ "flag": st,"lastOp":new Date().toLocaleString()})
       .catch(error => this.handleError(error));
   }

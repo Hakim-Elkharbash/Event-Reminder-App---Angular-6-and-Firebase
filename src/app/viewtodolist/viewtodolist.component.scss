@@ -44,9 +44,45 @@
 
 }
 
+.ItemCSS{
+    padding: 10px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.GoogleLink{
+    font-size: 0.75em; 
+    float: right;
+    color: gray;
+    padding: 5px;
+}
+
+.GoogleLink:hover{
+    text-decoration: none;
+    color: #f1f1f1;
+}
+
+.NoGPS{
+    font-size: 0.75em; 
+    color: white;
+    background-color: gray;
+    margin-top: 5px;
+}
+
+.ShowContent{
+    transition: height .5s;
+    -ms-transition: height .5s;
+    -o-transition: height .5s;
+    -webkit-transition: height .5s;
+    transition: height .5s;
+    height: 0;
+    overflow: hidden;
+}
+
+
 mgl-map {
-    height: 300px;
+    height: 250px;
     width: 100%;
-    border: gray solid 4px;
+    border: gray solid 1px;
     border-radius: 5px;
 }

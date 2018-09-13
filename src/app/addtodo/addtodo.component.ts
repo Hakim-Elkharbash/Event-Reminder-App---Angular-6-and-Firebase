@@ -28,13 +28,16 @@ export class AddtodoComponent implements OnInit {
 
   onSubmit(){
     if (this.accessAddForm.valid){
-      var status:string = "New" //initial value for Event (New) of three status: New, Completed and Cancelled
-      if (this.model.location == null) { this.Latitude = 0; this.Longitude = 0; }// Check if the user pick up the location or not.
 
+      // date and time..
       var startTime = moment(this.model.dtrange[0], "YYYY.MM.DD HH:mm:ss a"); // convert START date&time as a momment fromat
       var endTime = moment(this.model.dtrange[1], "YYYY.MM.DD HH:mm:ss a");  // convert END date&time as a momment fromat
       var duration = moment.duration(endTime.diff(startTime)).humanize();  // calculate DURATION via moment.duration(endTime.diff(startTime)) AND fromat it as a human format using: .humanize() property
-     
+      var status:string = "Active";
+      
+      // event location.
+      if (this.model.location == null) { this.Latitude = 0; this.Longitude = 0; }// Check if the user pick up the location or not.
+
       this.todoAction.addtodoitem(this.model.dtrange[0].toLocaleString(),this.model.dtrange[1].toLocaleString(),duration,this.model.description,this.Latitude,this.Longitude,status)
             /* this.accessAddForm.reset({
               dt:null,
@@ -45,7 +48,7 @@ export class AddtodoComponent implements OnInit {
         this.toastr.success('Item has been added.', 'Event Reminder',{
           positionClass: 'toast-bottom-right',
         }); // Show message if successed
-        this.router.navigate(['']); // route to the main view (My Events) when the user Add new event.
+        //this.router.navigate(['']); // route to the main view (My Events) when the user Add new event.
     }else{
         this.toastr.error('Input error.', 'Event Reminder'); // Show message if inputs error
     }
@@ -70,5 +73,6 @@ export class AddtodoComponent implements OnInit {
   cleanGPS(){ // to clean the loaction field if user wouldn't add the locaion
     this.model.location = null
   }
+
 
 }
