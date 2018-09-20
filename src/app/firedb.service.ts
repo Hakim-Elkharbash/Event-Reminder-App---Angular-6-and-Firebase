@@ -12,6 +12,9 @@ export class FiredbService {
   todosItemsRef: AngularFireList<any>;
   todosItems: Observable<any[]>;
 
+  todosSettingsRef: AngularFireList<any>;
+  todossettings: Observable<any>;
+
   constructor(private todoDB: AngularFireDatabase) {
 
     this.todosItemsRef = todoDB.list('todos');
@@ -20,11 +23,26 @@ export class FiredbService {
           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
         )
       );
+
+
+
+    this.todosSettingsRef = todoDB.list('settings');
+    this.todossettings = this.todosSettingsRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+      
+    );
        
   }
 
   viewtodolist(){
     return this.todosItems;
+  }
+
+
+  viewtodosettings(){
+    return this.todossettings;
   }
 
   addtodoitem(itemSDate:any, itemEDate:any, duration:string, itemDes:any, itemLat: number, itemLng: number, itemSt: any){
@@ -46,6 +64,12 @@ export class FiredbService {
 
   updatetodoitem(itemid: any, st: string){
     this.todosItemsRef.update(itemid,{ "flag": st,"lastOp":new Date().toLocaleString()})
+      .catch(error => this.handleError(error));
+  }
+
+
+  updateEmail(email:string){
+    this.todosSettingsRef.update("general",{ "email": email})
       .catch(error => this.handleError(error));
   }
 

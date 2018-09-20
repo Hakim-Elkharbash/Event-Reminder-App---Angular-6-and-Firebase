@@ -171,6 +171,7 @@ export class ViewtodolistComponent implements OnInit {
   loadSpinner: boolean = true;
   ShowMapID:number = -1; //to hold map div ID
   itemStauts: string;
+  NotificatioEmail: string;
   //countItems: number = 0;
   //stateName: any = {state:"hide", id:0};
 
@@ -237,11 +238,18 @@ export class ViewtodolistComponent implements OnInit {
      //--- Subscribe the observable to: 
     //      1. Remove the load Spinner after grabbing the data.
     .subscribe(result => {
-     // console.log(result)
+    console.log(result)
      //--- Hide loadSpinner
      //this.countItems = result.length; // to count the results
      this.loadSpinner = false;  // change *ngIf="loadSpinner" to false to Hide it
    }) 
+
+
+    // To get Email notification address in order to show it on Toster message
+      this.todoAction.viewtodosettings().subscribe(result => {
+        //console.log(result)
+        this.NotificatioEmail = result[0].email;
+      })  
 
   }
 
@@ -288,11 +296,16 @@ addtocal(startCal:Date,endCal:Date,descripCal){
 
 
 //----- send email notifitions  
-sendemail(){
-  this.smsmailService.sendemail()
+sendemail(eventContent:any){
+  this.loadSpinner = true; // show spinner while sending the notofication email.
+  console.log(eventContent)
+  this.smsmailService.sendemail(eventContent)
     .subscribe(
       data => {
-        console.log( data)
+        this.loadSpinner = false; // hide spinner after sending the notification email.
+        this.toastr.success(`Email has been sent to: (${this.NotificatioEmail}). Settings: to update email.`, 'Event Reminder'); // Show message with notifation email address.
+        //console.log( data)
+        //console.log(JSON.parse(JSON.stringify(data)))
       },
       //cache => console.log('oops', cache) // we could use this form too to catch Errors
       error => {

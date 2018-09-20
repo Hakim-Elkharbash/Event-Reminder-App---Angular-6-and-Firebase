@@ -1,3 +1,78 @@
-<p>
-  todosetting works!
-</p>
+<br>
+
+<div class="container">
+  
+  <div class="card card-outline-secondary">
+      <div class="card-header">
+          <h4 class="mb-0">Settings..</h4>
+      </div>
+      <div class="card-body">
+          <form 
+            class="form" 
+            role="form" 
+            autocomplete="off" 
+            name="form"  
+            #f="ngForm" 
+            (ngSubmit)="onSubmit()" 
+            novalidate 
+          >
+
+
+              <div class="form-group row">
+                
+                  <label class="col-lg-3 col-form-label form-control-label text-lg-right">Email Notification:</label>
+                  <div class="col-lg-9">
+                      <input 
+                            class="form-control" 
+                            name="email" 
+                            email
+                            type="email"
+                            required
+                            ngTrim="false" 
+                            placeholder="Your email.."
+                            [(ngModel)]="model.email" 
+                            #email="ngModel"
+                            [ngClass]="{
+                                'is-invalid': f.submitted && email.errors
+                            }"
+                        >
+                        <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+                            <div *ngIf="email.errors.required"> <i class="fas fa-times-circle"></i> email is required. </div>
+                            <div *ngIf="email.errors.email"><i class="fas fa-times-circle"></i> Must be a valid email address</div>
+                          </div>
+                        <!-- check errors
+                            {{email.dirty}}
+                            {{email.valid}}
+                            {{email.touched}} 
+                        -->
+                    </div>
+              </div>
+
+
+
+
+
+              <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label"></label>
+                  <div class="col-lg-9">
+                        <input type="submit" class="btn btn-dark" value="Update.." >
+                        <!-- <input type="submit" [disabled]="!f.valid" class="btn btn-dark" value="Add To-DO" > -->
+                        &nbsp;
+                      <input type="button" class="btn btn-outline-info" value="My Events"  (click)="gotosomewhere()">
+                  </div>
+              </div>              
+          </form>
+      </div>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+     <!-- <pre>{{ f.value | json }}</pre>  -->
+
