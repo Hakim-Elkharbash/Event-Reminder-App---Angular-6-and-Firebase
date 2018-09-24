@@ -182,6 +182,7 @@ export class ViewtodolistComponent implements OnInit {
   public outlookLiveCalendarEventUrl: SafeUrl;
   public iCalendarCalendarEventUrl: SafeUrl;
   public newEvent: ICalendarEvent;
+  public ShearedData: any;
   
 
   constructor(private todoAction: FiredbService, private modalService: NgbModal, private toastr:ToastrService,private _addToCalendarService: NgAddToCalendarService,private _sanitizer: DomSanitizer, private smsmailService:EmailsmsphpService) {
@@ -251,6 +252,10 @@ export class ViewtodolistComponent implements OnInit {
         this.NotificatioEmail = result[0].email;
       })  
 
+      // To handel 
+      this.todoAction.ShearDataBetweenComp().subscribe((data)=>{
+        this.ShearedData = data;
+      })
   }
 
 

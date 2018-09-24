@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -14,6 +15,7 @@ export class FiredbService {
 
   todosSettingsRef: AngularFireList<any>;
   todossettings: Observable<any>;
+  ShearData = new Subject<any>();  // to shear data between componenets.
 
   constructor(private todoDB: AngularFireDatabase) {
 
@@ -72,6 +74,10 @@ export class FiredbService {
     this.todosSettingsRef.update("general",{ "email": email})
       .catch(error => this.handleError(error));
   }
+
+  ShearDataBetweenComp(){ // Use Subject from rxjs to handel shearing data between components.
+  return this.ShearData.asObservable();
+}
 
   //----- to handle errors
   private handleError(error) {

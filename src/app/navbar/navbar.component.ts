@@ -40,4 +40,14 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+
+
+  ShearDataClick(clicked:string){ // to handel clicks (for Sorting by: Date, Content and Stutes)
+    this.todoAction.ShearData.next(clicked); // send type of click
+  }
+
+  ShearDataKeyPress(event:any){ // to handel typing in Search input.
+    this.todoAction.ShearData.next(event.target.value);  // event.target.value: to get chars from event object
+  }
+
 }

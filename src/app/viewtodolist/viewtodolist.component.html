@@ -17,7 +17,7 @@
 
 
 <div class="container">
-
+{{ ShearedData }}
     <div *ngIf="(todosItems | async); let items" @listStagger (@listStagger.start)="onAnimationStart($event)" (@listStagger.done)="onAnimationEnd($event)">
         <!-- Animation has to be without (async) pipe, therefore I apply it on the *ngIf and resolve it as (items) then use item with *ngFor as shown below-->
         
