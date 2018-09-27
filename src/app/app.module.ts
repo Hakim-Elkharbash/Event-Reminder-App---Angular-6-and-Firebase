@@ -31,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { MomentModule } from 'ngx-moment';
 
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { FiltersPipe } from './filters.pipe';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     ViewtodolistComponent,
     TodosettingComponent,
     LoadingspinnerComponent,
+    FiltersPipe,
     
   ],
   imports: [

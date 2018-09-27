@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top margin-border-top">
-    <a class="navbar-brand" href="#">ToDos.LY</a>
+    <a class="navbar-brand" routerLink=""> <i class="far fa-calendar-alt"></i> Event Reminder</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,25 +48,30 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="form-inline my-2 my-lg-0">
-              <input [disabled]="currentUrl != '/'" class="form-control mr-sm-2" type="search" placeholder="Search.." aria-label="Search" (keyup)="ShearDataKeyPress($event)">
+              <input [disabled]="currentUrl != '/' || countItems == 0" class="form-control mr-sm-2" type="search" placeholder="Search.." aria-label="Search" (keyup)="ShearDataKeyPress($event)">
               <!-- <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button> -->
           </form>
           &nbsp;&nbsp;
+<!--        <span class="badge badge-secondary left" placement="top" ngbTooltip="Show events code"> A </span> &nbsp;&nbsp;&nbsp; -->
+           
         <ul class="navbar-nav mr-auto" >
          <li class="nav-item dropup">
-            <button [disabled]="currentUrl != '/'" class="btn btn-outline-success dropdown-toggle" routerLink="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Sort
+            <button [disabled]="currentUrl != '/' || countItems == 0" class="btn btn-outline-success dropdown-toggle" routerLink="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Show Events
             </button>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" routerLink="" (click)="ShearDataClick('Date')">Date</a>
-                <a class="dropdown-item" routerLink="" (click)="ShearDataClick('Status')">Status</a>
+                <a class="dropdown-item" routerLink="" (click)="ShearDataClick('Happening Now')">Happening Now</a>
+                <a class="dropdown-item" routerLink="" (click)="ShearDataClick('Up Coming')">Up Coming</a>
+                <a class="dropdown-item" routerLink="" (click)="ShearDataClick('Completed')">Completed</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" routerLink="" (click)="ShearDataClick('Contant')">Contant</a>
+                <a class="dropdown-item" routerLink="" (click)="ShearDataClick('All')">All Events</a>
               </div>
           </li> 
         </ul>
-    
-        <button [disabled]="currentUrl != '/'" class="btn btn-outline-danger my-2 my-sm-0" (click)="delalltodoitemsConfirmed(content)" placement="left" ngbTooltip="Delete all item">Delete All ({{ countItems }})</button>
+       
+
+
+        <button [disabled]="currentUrl != '/' || countItems == 0" class="btn btn-outline-danger my-2 my-sm-0" (click)="delalltodoitemsConfirmed(content)" placement="left" ngbTooltip="Delete all item">Delete All ({{ countItems }})</button>
 
       </div>
   </nav>

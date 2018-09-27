@@ -15,7 +15,8 @@ export class FiredbService {
 
   todosSettingsRef: AngularFireList<any>;
   todossettings: Observable<any>;
-  ShearData = new Subject<any>();  // to shear data between componenets.
+  ShearDataOption = new Subject<any>();  // to shear data between componenets (Click option).
+  ShearDataSearch = new Subject<any>();  // to shear data between componenets (Search term).
 
   constructor(private todoDB: AngularFireDatabase) {
 
@@ -76,8 +77,8 @@ export class FiredbService {
   }
 
   ShearDataBetweenComp(){ // Use Subject from rxjs to handel shearing data between components.
-  return this.ShearData.asObservable();
-}
+    return { ShearDataSearch: this.ShearDataSearch.asObservable(), ShearDataOption: this.ShearDataOption.asObservable() }
+  }
 
   //----- to handle errors
   private handleError(error) {

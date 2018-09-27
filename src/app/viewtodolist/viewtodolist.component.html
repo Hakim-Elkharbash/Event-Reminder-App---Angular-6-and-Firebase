@@ -1,12 +1,15 @@
-<div *ngIf="(todosItems | async)?.length==0">
+<div *ngIf="(todosItems | async)?.length == 0" style="margin:30px;" >
     <div class="container">
-        <main role="main" class="inner cover">
-                <h1 class="cover-heading">Create your Event Reminder</h1>
-                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-                <p class="lead">
-                  <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-                </p>
-        </main>
+        <div class="jumbotron">
+                <h1 class="display-4">Manage Your Events..</h1>
+                <p class="lead">This app was developed to create, manage and send reminders of events, the app has tons of features and functions. The app has developed using Angular 6 and Firebase.</p>
+                <hr class="my-4">
+                <p>The app avaliabe on <i class="fab fa-github-alt"></i> Github.</p>
+                <a class="btn btn-dark" routerLink="addtodo" role="button"><i class="fas fa-calendar-alt"></i> Get Started.. add the first event</a> <a class="btn btn-link" routerLink="todosetting" role="button">Settings</a>
+        </div>
+        <div style="color:gray; text-align: left; font-style: italic; margin-top: -20px; font-size: 0.9em">Developed by: <span style="font-weight: bold"><a href="mailto:hakem_g@yahoo.com"> Hakim Elkharbash </a></span> @ 2018.</div>
+        <div style="text-align: right; font-size: 0.75em; margin-top: -20px"><a href="https://www.linkedin.com/in/hakim-elkharbash/" target="_blank" class="linkCo"><i class="fab fa-linkedin fa-2x"></i></a> &nbsp; <a href="https://github.com/libyapages" target="_blank" class="linkCo"><i class="fab fa-github fa-2x"></i></a> &nbsp; <a href="https://www.facebook.com/LibyaPages.Net" target="_blank" class="linkCo"><i class="fab fa-facebook fa-2x"></i></a></div>
+
     </div>
 </div>
 
@@ -16,20 +19,39 @@
 <!-- <div> {{ (todosItems | async)?.length }} </div>  To count items in observable array-->
 
 
-<div class="container">
-{{ ShearedData }}
-    <div *ngIf="(todosItems | async); let items" @listStagger (@listStagger.start)="onAnimationStart($event)" (@listStagger.done)="onAnimationEnd($event)">
+<div class="container" *ngIf="(todosItems | async)?.length != 0">
+    <div *ngIf="(todosItems | async); let items" @explainerAnim (@explainerAnim.start)="onAnimationStart($event)" (@explainerAnim.done)="onAnimationEnd($event)">
         <!-- Animation has to be without (async) pipe, therefore I apply it on the *ngIf and resolve it as (items) then use item with *ngFor as shown below-->
         
-        <div class="card text-white border-info bg-dark  mb-3" *ngFor="let item of items; let i = index; trackBy: trackObject"
+        <div *ngIf="ShearedData?.length > 0 || ShearedDataOption?.length > 0 " style="padding-bottom:10px;">
+            <button type="button" class="btn btn-dark">
+               Searhing on: <span style="font-weight:bold; padding-right: 10px;">{{ShearedData}} </span> | Showing: <span style="font-weight:bold; padding-right: 10px;">  ( {{ShearedDataOption}} ) Events.</span>
+                <!--  {{ (items | filters: ShearedData)?.length }} (To count the filter results)-->            
+            </button>
+            <div class=" float-right">
+                    <button type="button" class="btn btn-dark">
+                            Found: <span class="badge badge-light">{{ (items | filters: ShearedData :ShearedDataOption)?.length }} Of {{items?.length}}</span>
+                    </button>
+            </div>
+        </div>
+
+        <div *ngIf="(items | filters: ShearedData :ShearedDataOption)?.length == 0" style="text-align:center; padding:25px; font-size:2em;">
+            <div class="jumbotron">
+                <p><i class="far fa-grin-wink"></i> No results founded.. Try again.</p>
+            </div>               
+        </div>
+        
+       
+        <div class="card text-white border-info bg-dark  mb-3" *ngFor="let item of items | filters: ShearedData :ShearedDataOption; let i = index; trackBy: trackObject"
                 [ngStyle]="{'opacity':item.flag === 'Active' ? '1' : '0.85','font-style':item.flag === 'Active' ? 'normal' : 'italic'}"
                 style="border:2px blue"
             >
                 <div class="card-header">
-                    <div class="btn-group pull-right" role="group" aria-label="Basic example">   
+                    <div class="btn-group pull-right" role="group" aria-label="Basic example">  
                         <span class="Stime" placement="bottom" ngbTooltip="{{ item.Sdate | date:'full' }}">{{ item.Sdate | date:'MMM d, yy ~ H:m'}}</span> <span class="theTO" placement="bottom" ngbTooltip="{{ item.duration }}">TO</span> <span class="Etime" placement="bottom" ngbTooltip="{{ item.Edate | date:'full' }}">{{ item.Edate | date:'MMM d, yy ~ H:m' }}</span> 
                     </div>
                     <div class=" float-right">
+                        
                         <span class="badge badge-light" *ngIf="item.flag == 'Active'"><i class="fas fa-heart"></i> Going</span> <span class="badge badge-secondary" *ngIf="item.flag != 'Active'"><i class="far fa-heart"></i> Not Going</span> &nbsp;
                         <span (click)="showContent(item)" placement="left" ngbTooltip="Show/Hide event">  <i *ngIf="item.openState == 'hide'" class="fas fa-eye-slash"></i><i *ngIf="item.openState == 'show'" class="fas fa-eye"></i></span>&nbsp;
                         <span (click)="deltodoitemConfirmed(content,item.key)" placement="left" ngbTooltip="Delete event"> <i class="fas fa-trash-alt"></i></span>
@@ -54,7 +76,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <div class="btn-group pull-right" role="group" aria-label="Basic example"> 
+                    <div class="btn-group pull-right" role="group" aria-label="Basic example" placement="top" ngbTooltip="Specified upon the event start and end time"> 
                         <button type="button" class="btn btn-success disabled">
                             <i class="fas fa-calendar-check"></i> {{ item.itemStauts }}
                         </button>

@@ -170,8 +170,11 @@ export class ViewtodolistComponent implements OnInit {
   closeResult: string;
   loadSpinner: boolean = true;
   ShowMapID:number = -1; //to hold map div ID
-  itemStauts: string;
+ // itemStauts: string;
   NotificatioEmail: string;
+  ShearedData: string;
+  ShearedDataOption: string = "All";
+
   //countItems: number = 0;
   //stateName: any = {state:"hide", id:0};
 
@@ -182,7 +185,6 @@ export class ViewtodolistComponent implements OnInit {
   public outlookLiveCalendarEventUrl: SafeUrl;
   public iCalendarCalendarEventUrl: SafeUrl;
   public newEvent: ICalendarEvent;
-  public ShearedData: any;
   
 
   constructor(private todoAction: FiredbService, private modalService: NgbModal, private toastr:ToastrService,private _addToCalendarService: NgAddToCalendarService,private _sanitizer: DomSanitizer, private smsmailService:EmailsmsphpService) {
@@ -202,7 +204,7 @@ export class ViewtodolistComponent implements OnInit {
     .pipe(
       map((todosItems) => { 
         todosItems.forEach((val,index) => { 
-          todosItems[index].openState = "hide";  // this forEach to loop over all array elements and add new property (openState = "show")
+          todosItems[index].openState = "show";  // this forEach to loop over all array elements and add new property (openState = "show")
 
           
           // to spicify the Event states: (Completed, Up Coming or Happening Now) according to the start and end date & time.
@@ -239,7 +241,7 @@ export class ViewtodolistComponent implements OnInit {
      //--- Subscribe the observable to: 
     //      1. Remove the load Spinner after grabbing the data.
     .subscribe(result => {
-    console.log(result)
+    //console.log(result)
      //--- Hide loadSpinner
      //this.countItems = result.length; // to count the results
      this.loadSpinner = false;  // change *ngIf="loadSpinner" to false to Hide it
@@ -249,12 +251,18 @@ export class ViewtodolistComponent implements OnInit {
     // To get Email notification address in order to show it on Toster message
       this.todoAction.viewtodosettings().subscribe(result => {
         //console.log(result)
-        this.NotificatioEmail = result[0].email;
+        this.NotificatioEmail = result[0].email; // first element in the array which has the email address.
       })  
 
-      // To handel 
-      this.todoAction.ShearDataBetweenComp().subscribe((data)=>{
+      // To handel shears data which come from footer bar in this case.
+      this.todoAction.ShearDataBetweenComp().ShearDataOption.subscribe((data)=>{
+        this.ShearedDataOption = data;
+        console.log(data) 
+      })
+
+      this.todoAction.ShearDataBetweenComp().ShearDataSearch.subscribe((data)=>{
         this.ShearedData = data;
+        console.log(data) 
       })
   }
 
@@ -346,9 +354,11 @@ sendemail(eventContent:any){
 
 //----- handling the way to access ngFor instead of using the reference.
   trackObject(idx:number, obj:any){ // should has 2 arg (index AND object)
-    this.itemStauts = obj.key
-      // console.log(obj.key)
-      // console.log(obj.item.length)  
+    //this.itemStauts = obj.key
+       //console.log(obj.key)
+       //console.log(idx);
+      //console.log(obj.item.length) 
+      //console.log(Object.keys(obj).length); 
       // return obj ? obj.key : null;    
       return obj.key; // using key (fiarbase key) instead of object reference.
                     // to optimize ngFor which (in this case) I use key (obj.key OR any other object properties) instead of reference, this very useful:
