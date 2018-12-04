@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ViewtodolistComponent } from './viewtodolist/viewtodolist.component';
 import { AddtodoComponent } from './addtodo/addtodo.component';
 import { TodosettingComponent } from './todosetting/todosetting.component';
-
+import { AboutComponent } from './about/about.component'
 
 const routes: Routes = [
   {
@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path:'todosetting',
     component: TodosettingComponent
+  },
+  {
+    path:'about',
+    component: AboutComponent
   },
 ];
 

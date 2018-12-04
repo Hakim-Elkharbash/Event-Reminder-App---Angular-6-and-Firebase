@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top margin-border-top">
-    <a class="navbar-brand" routerLink=""> <i class="far fa-calendar-alt"></i> Event Reminder</a>
+    <a class="navbar-brand" routerLink="about"> <i class="far fa-calendar-alt"></i> Event Reminder</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,20 +12,23 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="addtodo"><i class="fas fa-plus"></i> Add</a>
         </li>
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" routerLink="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
+
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-info-circle"></i> About
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" routerLink="">Action</a>
-            <a class="dropdown-item" routerLink="">Another action</a>
+            <a class="dropdown-item" routerLink="about"><i class="fas fa-info-circle"></i> About</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" routerLink="">Something else here</a>
+            <a class="dropdown-item" routerLink="todosetting"><i class="fas fa-sliders-h"></i> Settings</a>
           </div>
-        </li> -->
+        </li> 
+
+<!--
         <li class="nav-item">
           <a class="nav-link" routerLink="todosetting"> <i class="fas fa-info-circle"></i> Settings</a>
         </li>
+-->
       </ul>
 
         <button type="button" class="btn btn-secondary" routerLink="addtodo" placement="left" ngbTooltip="Click to add new item">

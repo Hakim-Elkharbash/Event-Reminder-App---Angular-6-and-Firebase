@@ -14,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddtodoComponent } from './addtodo/addtodo.component';
 import { ViewtodolistComponent } from './viewtodolist/viewtodolist.component';
 import { TodosettingComponent } from './todosetting/todosetting.component';
+import { AboutComponent } from './about/about.component';
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -43,6 +44,7 @@ import { FiltersPipe } from './filters.pipe';
     TodosettingComponent,
     LoadingspinnerComponent,
     FiltersPipe,
+    AboutComponent,
     
   ],
   imports: [

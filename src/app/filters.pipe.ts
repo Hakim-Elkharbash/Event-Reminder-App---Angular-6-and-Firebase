@@ -33,5 +33,3 @@ export class FiltersPipe implements PipeTransform {
     }
      }
     }
-
-}
