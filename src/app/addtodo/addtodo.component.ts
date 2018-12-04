@@ -16,7 +16,7 @@ export class AddtodoComponent implements OnInit {
   @ViewChild("f") accessAddForm: any;  // to have access to the form instance through the code in order to use (form functions) such as: .valid AND .reset
   Latitude: number;
   Longitude: number;
-
+  ShowMap: boolean;
   constructor(private todoAction: FiredbService, private router: Router, private toastr:ToastrService) {
 
   }
