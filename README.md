@@ -11,17 +11,17 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Functions & Features
 - Adding new events with GPS location and start/end date and time.
-- Handeling all kind of input errors.
+- Handling all kind of input errors.
 - Show notifications for app operations and actions.
 - Show event details such as: duration and GPS location on the map.
 - Update (Going/Not Going) status for all events.
-- Managing three differentstauts (Happing Now - Comming - Completed) accourding to evant date/time.
-- Delete specific evants or all events together after showing confirmation message.
-- Apply three diffrent Angular 6 animations.
-- Show loading spinner while pulling the events informations.
+- Managing three different status (Happening Now - Coming - Completed) according to event date/time.
+- Delete specific events or all events together after showing confirmation message.
+- Apply three different Angular 6 animations.
+- Show loading spinner while pulling the events information.
 - Show/Hide events.
 - Send email reminders.
-- Add event details to these calenders: iCalender, Google, Yahoo and Outlook.
+- Add event details to these calendars apps: iCalender, Google, Yahoo and Outlook.
 - Apply searching and filtering to get certain events.
 - Disable search, filter and delete, if there are no events.
 - Show welcome message,if there are no events.
